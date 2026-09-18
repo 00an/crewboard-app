@@ -1,0 +1,21 @@
+server:
+  port: 3001
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;NON_KEYWORDS=USER,VALUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expirationMillis: 28800000

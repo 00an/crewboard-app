@@ -1,0 +1,18 @@
+# ── DEV PROFILE ───────────────────────────────────────────────
+# Local/demo convenience overrides only. Activate explicitly with:
+#   SPRING_PROFILES_ACTIVE=dev mvn spring-boot:run
+# Never used unless this profile is opted into.
+app:
+  jwt:
+    # Dev-only fallback signing key. Only ever active under this profile.
+    secret: "${JWT_SECRET:dev-only-secret-do-not-use-in-production-please-change-me}"
+
+  security:
+    cookie-secure: false        # allow the JWT cookie over plain HTTP locally
+    dev-tools-enabled: true     # expose H2 console / actuator / Swagger UI
+    trust-proxy-headers: false
+
+cors:
+  allowed-origins:
+    - http://localhost:3000
+    - http://localhost:3001

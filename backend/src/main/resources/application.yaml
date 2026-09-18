@@ -1,0 +1,69 @@
+# ── SERVER CONFIG ───────────────────────────────────────────────
+server:
+  port: 3001
+
+spring:
+  application:
+    name: crewboard-backend
+
+  # No default profile is set here: Spring Boot activates one via the
+  # SPRING_PROFILES_ACTIVE env var / --spring.profiles.active flag if
+  # given. Without one, the app runs "production-strict" (see below) and
+  # application-dev.yaml (activated with the "dev" profile) supplies the
+  # local/demo conveniences.
+
+  # ── SECURITY (JWT) ───────────────────────────────────────────
+  security:
+    filter:
+      dispatcher-types: request
+    user:
+      name: disabled        # ensure default user is disabled (we use JWT)
+    oauth2:
+      resourceserver:
+        jwt:
+          authority-prefix: ""
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+
+# ── JWT CONFIG (custom) ──────────────────────────────────────────
+# No default secret here on purpose: outside the "dev" profile, the app
+# refuses to start unless JWT_SECRET is set explicitly. This prevents the
+# app from ever silently running with a known/guessable signing key.
+app:
+  jwt:
+    secret: "${JWT_SECRET}"
+    expirationMillis: 28800000   # 8 hours = 8 * 60 * 60 * 1000
+
+  security:
+    # Cookie gets the Secure flag by default (requires HTTPS). Only the
+    # dev profile relaxes this so local HTTP development still works.
+    cookie-secure: true
+    # Dev-only endpoints (H2 console, actuator, Swagger UI) are closed
+    # unless a profile explicitly opens them.
+    dev-tools-enabled: false
+    # RateLimitFilter ignores X-Forwarded-For unless this is true. Only
+    # enable it when the app actually sits behind a trusted reverse proxy
+    # that sets/overwrites this header itself.
+    trust-proxy-headers: false
+
+# ── CORS CONFIG ────────────────────────────────────────────────
+# Bound to CorsProperties and used directly by SecurityConfig's
+# CorsConfigurationSource bean — this is the single source of truth.
+cors:
+  allowed-origins:
+    - http://localhost:3000
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - Accept
+    - Origin
+  allow-credentials: true

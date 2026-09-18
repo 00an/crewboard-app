@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   Base styles — clean, readable, neutral
+   ===================================================== */
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-white text-black antialiased;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply text-emerald-600 hover:text-emerald-700 transition-colors;
+  }
+}
+
+/* =====================================================
+   Reusable components
+   ===================================================== */
+@layer components {
+  /* Layout */
+  .page-container {
+    @apply mx-auto max-w-6xl px-4 py-6;
+  }
+
+  .page-title {
+    @apply text-3xl font-bold mb-2;
+  }
+
+  .page-subtitle {
+    @apply text-black/60 mb-6;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl border border-black/10 bg-white p-5 shadow-sm;
+  }
+
+  .card-accent {
+    @apply border-emerald-200 bg-emerald-50;
+  }
+
+  /* Tables */
+  .table-base {
+    @apply w-full text-sm border border-black/10 rounded-xl overflow-hidden bg-white;
+  }
+
+  .table-base thead tr {
+    @apply bg-black/5 text-left;
+  }
+
+  .table-base tbody tr {
+    @apply border-t border-black/10 hover:bg-black/5 transition-colors;
+  }
+
+  .table-base th,
+  .table-base td {
+    @apply px-4 py-2;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2
+           text-sm font-medium transition
+           focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-emerald-600 text-white hover:bg-emerald-700;
+  }
+
+  .btn-secondary {
+    @apply bg-black/5 text-black hover:bg-black/10;
+  }
+
+  .btn-outline {
+    @apply border border-emerald-600 text-emerald-700 hover:bg-emerald-50;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+
+  /* Inputs */
+  .label {
+    @apply block text-sm font-medium mb-1;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-black/20 bg-white px-3 py-2
+           text-sm placeholder-black/40
+           focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+
+  .badge-success {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 text-red-700;
+  }
+}
+
+/* =====================================================
+   Utilities / third-party fixes
+   ===================================================== */
+@layer utilities {
+  .customDatePickerWidth,
+  .customDatePickerWidth > div.react-datepicker-wrapper,
+  .customDatePickerWidth
+    > div
+    > div.react-datepicker__input-container
+    input {
+    @apply w-full;
+  }
+}

@@ -1,0 +1,36 @@
+filebeat.inputs:
+
+  - type: log
+    enabled: true
+    paths:
+      - /app/logs/app.log
+    fields:
+      log_type: app
+    fields_under_root: true
+    json.keys_under_root: true
+    json.add_error_key: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /app/logs/security.log
+    fields:
+      log_type: security
+    fields_under_root: true
+    json.keys_under_root: true
+    json.add_error_key: true
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  indices:
+    - index: "crewboard-app-%{+yyyy.MM.dd}"
+      when.equals:
+        log_type: "app"
+    - index: "crewboard-security-%{+yyyy.MM.dd}"
+      when.equals:
+        log_type: "security"
+
+setup.kibana:
+  host: "kibana:5601"
+
+logging.level: error

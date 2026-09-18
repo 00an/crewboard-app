@@ -1,0 +1,36 @@
+# Frontend build
+frontend/node_modules/
+frontend/.next/
+frontend/tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Frontend secrets
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Backend build
+backend/target/
+
+# Backend secrets
+backend/.env
+backend/.env.local
+/backend/application.yaml
+/application.yaml
+
+# IDE files
+.idea/
+/.claude
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
