@@ -13,8 +13,8 @@ The app has two modes, selected by the `dev` Spring profile.
 
 ### Local development (recommended for trying the app out)
 
-```bash
-SPRING_PROFILES_ACTIVE=dev mvn spring-boot:run
+```
+set SPRING_PROFILES_ACTIVE=dev && mvn spring-boot:run
 ```
 
 This mode:
